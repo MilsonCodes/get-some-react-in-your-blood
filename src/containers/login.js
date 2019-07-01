@@ -1,11 +1,26 @@
 import React from "react";
-import Input from "../components/Input";
-import Submit from "../components/Submit";
-import { Link } from "react-router-dom";
+import Form from "../components/Form";
 
 const formStyle = {
   padding: 5
 };
+
+const loginField = [
+  {
+    name: "username",
+    placeholder: "Username: ",
+    type: "username",
+    required: true,
+    key: 1
+  },
+  {
+    name: "password",
+    placeholder: "Password: ",
+    type: "password",
+    required: true,
+    key: 2
+  }
+];
 
 class LoginPage extends React.Component {
   constructor(props) {
@@ -14,17 +29,7 @@ class LoginPage extends React.Component {
       username: null,
       password: null
     };
-    this.onChange1 = this.onChange1.bind(this);
-    this.onChange2 = this.onChange2.bind(this);
     this.submit = this.submit.bind(this);
-  }
-
-  onChange1(event) {
-    this.setState({ username: event.target.value });
-  }
-
-  onChange2(event) {
-    this.setState({ password: event.target.value });
   }
 
   submit() {
@@ -35,26 +40,15 @@ class LoginPage extends React.Component {
   render() {
     return (
       <div>
-        <h1>Login Page</h1>
-        <p>Please enter your login credentials</p>
         <form style={formStyle}>
           <div style={formStyle}>
-            <Input
-              type={"USERNAME"}
-              onChange={this.onChange1}
-              label={"Username: "}
+            <Form
+              fields={loginField}
+              onSubmitCallback={this.submit}
+              title="Login Page"
+              info="Please enter your login credentials"
             />
           </div>
-          <div style={formStyle}>
-            <Input
-              type={"PASSWORD"}
-              onChange={this.onChange2}
-              label={"Password: "}
-            />
-          </div>
-          <Link to="/">
-            <Submit onClick={this.submit} value="Login" />
-          </Link>
         </form>
       </div>
     );
