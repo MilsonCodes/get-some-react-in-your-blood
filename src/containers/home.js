@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import ModalView from "../components/Modal";
 
 const buttonStyle = {
   height: 25,
@@ -16,7 +17,7 @@ function HomePage() {
     <div>
       <h1>Home Page</h1>
       <p> Welcome to the Homepage!</p>
-
+      <ModalView />
       <Link to="/login">
         <button style={buttonStyle}>Login Page</button>
       </Link>
