@@ -1,7 +1,8 @@
 import React from "react";
 import { Modal } from "@material-ui/core";
 import LoginPage from "../containers/login";
-import { handleOpen } from "../utils/actions";
+import { hideModal, showModal } from "../utils/actions";
+import { connect } from "react-redux";
 
 const buttonStyle = {
   height: 25,
@@ -13,23 +14,21 @@ const buttonStyle = {
   borderRadius: "4px"
 };
 
-function ModalView(props) {
-  const [setOpen] = React.useState(false);
+const mapDispatchToFunc = dispatch => ({
+  onClick: () => dispatch(showModal())
+});
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-
+function ModalView({ dispatch }) {
   return (
     <div>
-      <button onClick={handleOpen} style={buttonStyle}>
-        Login
+      <button onClick={null} style={buttonStyle}>
+        Modal
       </button>
       <Modal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
-        open={true}
-        onClose={handleClose}
+        open={false}
+        onClose={hideModal}
       >
         <div>
           <LoginPage />
@@ -39,4 +38,4 @@ function ModalView(props) {
   );
 }
 
-export default ModalView;
+export default connect(mapDispatchToFunc)(ModalView);
