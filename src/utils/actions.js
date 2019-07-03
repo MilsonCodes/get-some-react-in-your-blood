@@ -6,9 +6,7 @@ export const showModal = () => ({
   isOpen: true
 });
 
-export const hideModal = () => dispatch => {
-  dispatch({
-    type: HIDE_MODAL,
-    isOpen: false
-  });
-};
+export const hideModal = () => ({
+  type: HIDE_MODAL,
+  isOpen: false
+});

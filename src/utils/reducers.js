@@ -5,7 +5,7 @@ const initialState = {
   modalType: HIDE_MODAL
 };
 
-export default (state = initialState, action) => {
+export default function modal(state = initialState, action) {
   switch (action.type) {
     case SHOW_MODAL:
       return {
@@ -17,4 +17,4 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
-};
+}

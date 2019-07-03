@@ -14,20 +14,25 @@ const buttonStyle = {
   borderRadius: "4px"
 };
 
-const mapDispatchToFunc = dispatch => ({
-  onClick: () => dispatch(showModal())
+const mapDispatchToFunc = {
+  showModal,
+  hideModal
+};
+
+const mapStateToProps = state => ({
+  isModalOpen: state.isOpen
 });
 
-function ModalView({ dispatch }) {
+function ModalView({ showModal, isModalOpen, hideModal }) {
   return (
     <div>
-      <button onClick={null} style={buttonStyle}>
+      <button onClick={showModal} style={buttonStyle}>
         Modal
       </button>
       <Modal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
-        open={false}
+        open={isModalOpen}
         onClose={hideModal}
       >
         <div>
@@ -38,4 +43,7 @@ function ModalView({ dispatch }) {
   );
 }
 
-export default connect(mapDispatchToFunc)(ModalView);
+export default connect(
+  mapStateToProps,
+  mapDispatchToFunc
+)(ModalView);

@@ -4,8 +4,9 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
+import modal from "./utils/reducers";
 
-const store = createStore(App);
+const store = createStore(modal);
 
 ReactDOM.render(
   <Provider store={store}>
