@@ -5,6 +5,29 @@ import * as mockData from "../api.json";
 // import { data } from "../api.js"; This is a js array as opposed to json object, can use .map function
 
 function PostComponent(props) {
+  var validatePost = new Promise(function(resolve, reject) {
+    if (props.postID >= 0 && props.postID < 100) {
+      var key = parseInt(props.postID);
+      var dataSet = mockData[key];
+      resolve(dataSet);
+    } else {
+      var err = new Error("invalid post id: " + props.postID);
+      reject(err);
+    }
+  });
+
+  var tryKey = function() {
+    validatePost
+      .then(function(fulfilled) {
+        console.log(fulfilled);
+      })
+      .catch(function(error) {
+        console.log(error.message);
+      });
+  };
+
+  tryKey();
+
   return (
     <div key={props.postID}>
       <h2>
@@ -29,28 +52,14 @@ class PostPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      postID: 50
+      postID: 50,
+      postBody: {
+        title: mockData[50].title,
+        content: mockData[50].content
+      }
     };
     this.nextPage = this.nextPage.bind(this);
     this.prevPage = this.prevPage.bind(this);
-    this.getTitle = this.getTitle.bind(this);
-    this.getContent = this.getContent.bind(this);
-  }
-
-  //   promise = new Promise(function(resolve, reject) {
-  //     if (this.state.postID > 0) {
-  //       resolve("Stuff worked!");
-  //     } else {
-  //       reject(Error("It broke"));
-  //     }
-  //   });
-
-  getTitle() {
-    return mockData[this.state.postID].title;
-  }
-
-  getContent() {
-    return mockData[this.state.postID].content;
   }
 
   nextPage() {
@@ -66,15 +75,11 @@ class PostPage extends React.Component {
   }
 
   render() {
-    console.log(this.state.postID);
+    console.log();
     return (
       <div>
         <h1>Post Page</h1>
-        <PostComponent
-          title={mockData[0].title}
-          content={mockData[0].content}
-          postID={mockData[0].postID}
-        />
+        <PostComponent postID={this.state.postID} />
         <div>
           <Link to="/post/:postId-1">
             <button onClick={this.prevPage} style={buttonStyle}>
@@ -95,8 +100,8 @@ class PostPage extends React.Component {
           <Route
             path="/post/:postID"
             component={PostComponent}
-            title={this.getTitle}
-            content={this.getContent}
+            title={this.state.postBody.title}
+            content={this.state.postBody.content}
             postID={this.state.postID}
           />
         </Router>
