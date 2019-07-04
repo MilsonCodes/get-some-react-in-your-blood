@@ -75,7 +75,7 @@ class PostPage extends React.Component {
   }
 
   render() {
-    console.log();
+    console.log(this.state.postID);
     return (
       <div>
         <h1>Post Page</h1>
