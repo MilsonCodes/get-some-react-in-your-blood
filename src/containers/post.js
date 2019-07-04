@@ -37,6 +37,14 @@ class PostPage extends React.Component {
     this.getContent = this.getContent.bind(this);
   }
 
+  //   promise = new Promise(function(resolve, reject) {
+  //     if (this.state.postID > 0) {
+  //       resolve("Stuff worked!");
+  //     } else {
+  //       reject(Error("It broke"));
+  //     }
+  //   });
+
   getTitle() {
     return mockData[this.state.postID].title;
   }
