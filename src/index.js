@@ -4,7 +4,7 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import modal from "./utils/reducers";
+import modal from "./reducers/modal";
 
 const store = createStore(modal);
 

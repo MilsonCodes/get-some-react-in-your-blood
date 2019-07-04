@@ -18,8 +18,8 @@ function HomePage() {
       <h1>Home Page</h1>
       <p> Welcome to the Homepage!</p>
       <ModalView />
-      <Link to="/login">
-        <button style={buttonStyle}>Login Page</button>
+      <Link to="/post/">
+        <button style={buttonStyle}>Post</button>
       </Link>
     </div>
   );

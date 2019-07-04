@@ -1,8 +1,15 @@
 import React from "react";
 import { Modal } from "@material-ui/core";
 import LoginPage from "../containers/login";
-import { hideModal, showModal } from "../utils/actions";
+import { hideModal, showModal } from "../actions/modal";
 import { connect } from "react-redux";
+
+const modalStyle = {
+  position: "absolute",
+  backgroundColor: "grey",
+  borderColor: "grey",
+  borderRadius: "6px"
+};
 
 const buttonStyle = {
   height: 25,
@@ -27,13 +34,14 @@ function ModalView({ showModal, isModalOpen, hideModal }) {
   return (
     <div>
       <button onClick={showModal} style={buttonStyle}>
-        Modal
+        Login Page
       </button>
       <Modal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
         open={isModalOpen}
         onClose={hideModal}
+        style={modalStyle}
       >
         <div>
           <LoginPage />
