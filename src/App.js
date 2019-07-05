@@ -17,7 +17,7 @@ function App() {
       <Router>
         <Route exact path="/" component={HomePage} />
         <Route path="/login" component={LoginPage} />
-        <Route path="/post/" component={PostPage} />
+        <Route path="/post/:postID" component={PostPage} />
       </Router>
     </div>
   );

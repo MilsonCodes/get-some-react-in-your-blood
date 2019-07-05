@@ -1,14 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import * as mockData from "../api.json";
-// import { data } from "../api.js"; This is a js array as opposed to json object, can use .map function
+import mockData from "../api.json";
 
 function PostComponent({ match }) {
   var validatePost = new Promise(function(resolve, reject) {
-    if (match.params.postID >= 0 && match.params.postID < 100) {
-      var key = parseInt(match.params.postID);
-      var dataSet = mockData[key];
+    var key = parseInt(match.params.postID);
+    if (key >= 0 && key < 100) {
+      var dataSet = mockData.find(post => post.postID === key);
       resolve(dataSet);
     } else {
       var err = new Error("invalid post id: " + match.params.postID);
@@ -28,13 +27,16 @@ function PostComponent({ match }) {
 
   tryKey();
 
-  //   var data = mockData[match.params.postID];
+  var key = parseInt(match.params.postID);
+  var data = mockData.find(post => post.postID === key);
 
   return (
-    // <div key={data.postID}>
-    <h2>{/* Post #{data.postID}: {data.title} */}POST</h2>
-    /* <p>{data.content}</p> */
-    // </div>
+    <div key={data.postID}>
+      <h2>
+        Post #{data.postID}: {data.title}POST
+      </h2>
+      <p>{data.content}</p>
+    </div>
   );
 }
 
@@ -54,8 +56,8 @@ class PostPage extends React.Component {
     this.state = {
       postID: 50,
       postBody: {
-        title: mockData[50].title,
-        content: mockData[50].content
+        title: "",
+        content: ""
       }
     };
     this.nextPage = this.nextPage.bind(this);
@@ -79,14 +81,13 @@ class PostPage extends React.Component {
     return (
       <div>
         <h1>Post Page</h1>
-        <PostComponent />
         <div>
-          <Link to="/post/:postId-1">
+          <Link to={`/post/${this.state.postID - 1}`}>
             <button onClick={this.prevPage} style={buttonStyle}>
               Previous
             </button>
           </Link>
-          <Link to="/post/:postId+1">
+          <Link to={`/post/${this.state.postID + 1}`}>
             <button onClick={this.nextPage} style={buttonStyle}>
               Next
             </button>
