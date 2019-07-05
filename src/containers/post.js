@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { BrowserRouter as Router, Route } from "react-router-dom";
 import mockData from "../api.json";
 
 function PostComponent({ match }) {
@@ -54,11 +53,7 @@ class PostPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      postID: 50,
-      postBody: {
-        title: "",
-        content: ""
-      }
+      postID: parseInt(this.props.match.params.postID)
     };
     this.nextPage = this.nextPage.bind(this);
     this.prevPage = this.prevPage.bind(this);
@@ -82,6 +77,7 @@ class PostPage extends React.Component {
       <div>
         <h1>Post Page</h1>
         <div>
+          <PostComponent match={this.props.match} />
           <Link to={`/post/${this.state.postID - 1}`}>
             <button onClick={this.prevPage} style={buttonStyle}>
               Previous
@@ -97,9 +93,6 @@ class PostPage extends React.Component {
           <button style={buttonStyle}>Home</button>
         </Link>
         <div />
-        <Router>
-          <Route path="/post/:postID" component={PostComponent} />
-        </Router>
       </div>
     );
   }
