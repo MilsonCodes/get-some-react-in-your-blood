@@ -4,14 +4,14 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import * as mockData from "../api.json";
 // import { data } from "../api.js"; This is a js array as opposed to json object, can use .map function
 
-function PostComponent(props) {
+function PostComponent({ match }) {
   var validatePost = new Promise(function(resolve, reject) {
-    if (props.postID >= 0 && props.postID < 100) {
-      var key = parseInt(props.postID);
+    if (match.params.postID >= 0 && match.params.postID < 100) {
+      var key = parseInt(match.params.postID);
       var dataSet = mockData[key];
       resolve(dataSet);
     } else {
-      var err = new Error("invalid post id: " + props.postID);
+      var err = new Error("invalid post id: " + match.params.postID);
       reject(err);
     }
   });
@@ -28,13 +28,13 @@ function PostComponent(props) {
 
   tryKey();
 
+  //   var data = mockData[match.params.postID];
+
   return (
-    <div key={props.postID}>
-      <h2>
-        Post #{props.postID}: {props.title}
-      </h2>
-      <p>{props.content}</p>
-    </div>
+    // <div key={data.postID}>
+    <h2>{/* Post #{data.postID}: {data.title} */}POST</h2>
+    /* <p>{data.content}</p> */
+    // </div>
   );
 }
 
@@ -79,7 +79,7 @@ class PostPage extends React.Component {
     return (
       <div>
         <h1>Post Page</h1>
-        <PostComponent postID={this.state.postID} />
+        <PostComponent />
         <div>
           <Link to="/post/:postId-1">
             <button onClick={this.prevPage} style={buttonStyle}>
@@ -97,13 +97,7 @@ class PostPage extends React.Component {
         </Link>
         <div />
         <Router>
-          <Route
-            path="/post/:postID"
-            component={PostComponent}
-            title={this.state.postBody.title}
-            content={this.state.postBody.content}
-            postID={this.state.postID}
-          />
+          <Route path="/post/:postID" component={PostComponent} />
         </Router>
       </div>
     );
