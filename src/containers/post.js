@@ -1,6 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import mockData from "../api.json";
+import styled from "styled-components";
+
+const Title = styled.h2`
+  color: ${props => (props.primary ? props.primary : "goldenrod")};
+  font-size: ${props => (props.size ? props.size : "3em")};
+  margin: 25px;
+  padding-bottom: 20px;
+  border-bottom: ${props => (props.border ? props.border : "")};
+  display: inline-block;
+  text-transform: capitalize;
+`;
+
+const Content = styled.p`
+  font-size: 1.5em;
+  margin: 25px;
+  padding-bottom: 20px;
+  display: inline-block;
+`;
+
+const Div = styled.div`
+  padding: 2rem 1rem;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
+  background: white;
+`;
 
 function PostComponent({ match }) {
   var validatePost = new Promise(function(resolve, reject) {
@@ -30,12 +56,14 @@ function PostComponent({ match }) {
   var data = mockData.find(post => post.postID === key);
 
   return (
-    <div key={data.postID}>
-      <h2>
-        Post #{data.postID}: {data.title}
-      </h2>
-      <p>{data.content}</p>
-    </div>
+    <Div key={data.postID}>
+      <div>
+        <Title size={"2.5em"} border={"1px solid black"}>
+          Post #{data.postID}: {data.title}
+        </Title>
+      </div>
+      <Content>{data.content}</Content>
+    </Div>
   );
 }
 
@@ -74,19 +102,23 @@ class PostPage extends React.Component {
   render() {
     return (
       <div>
-        <h1>Post Page</h1>
+        <Title primary={"black"}>Post Page</Title>
         <div>
-          <PostComponent match={this.props.match} />
-          <Link to={`/post/${this.state.postID - 1}`}>
-            <button onClick={this.prevPage} style={buttonStyle}>
-              Previous
-            </button>
-          </Link>
-          <Link to={`/post/${this.state.postID + 1}`}>
-            <button onClick={this.nextPage} style={buttonStyle}>
-              Next
-            </button>
-          </Link>
+          <div>
+            <PostComponent match={this.props.match} />
+          </div>
+          <div style={{ marginTop: "2em" }}>
+            <Link to={`/post/${this.state.postID - 1}`}>
+              <button onClick={this.prevPage} style={buttonStyle}>
+                Previous
+              </button>
+            </Link>
+            <Link to={`/post/${this.state.postID + 1}`}>
+              <button onClick={this.nextPage} style={buttonStyle}>
+                Next
+              </button>
+            </Link>
+          </div>
         </div>
         <Link to="/">
           <button style={buttonStyle}>Home</button>
