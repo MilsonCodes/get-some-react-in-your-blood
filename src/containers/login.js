@@ -30,11 +30,19 @@ class LoginPage extends React.Component {
       password: null
     };
     this.submit = this.submit.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   submit() {
-    console.log(this.state.username);
-    console.log(this.state.password);
+    console.log("Submitted!");
+  }
+
+  onChange(event) {
+    let name = event.target.name;
+    console.log(name);
+    // this.setState(state => {
+    //   return { [name]: event.target.value };
+    // });
   }
 
   render() {
@@ -47,6 +55,7 @@ class LoginPage extends React.Component {
               onSubmitCallback={this.submit}
               title="Login Page"
               info="Please enter your login credentials"
+              onChange={this.onChange}
             />
           </div>
         </form>

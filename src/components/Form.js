@@ -8,11 +8,6 @@ const divStyle = {
 };
 
 function Form(props) {
-  function onChange(event) {
-    let name = event.target.name;
-    console.log(name);
-  }
-
   const fields = props.fields;
   function Inputs() {
     return fields.map(fields => (
@@ -22,7 +17,7 @@ function Form(props) {
           placeholder={fields.placeholder}
           type={fields.type}
           required={fields.required}
-          onChange={onChange}
+          onChange={props.onChange}
           autocomplete={"off"}
         />
       </div>

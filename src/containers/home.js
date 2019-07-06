@@ -17,8 +17,8 @@ function HomePage() {
     <div>
       <h1> Home Page </h1> <p> Welcome to the Homepage! </p> <ModalView />
       <Link to="/post/50">
-        <button style={buttonStyle}> Post </button>{" "}
-      </Link>{" "}
+        <button style={buttonStyle}> Post </button>
+      </Link>
     </div>
   );
 }

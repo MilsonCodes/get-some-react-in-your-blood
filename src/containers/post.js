@@ -32,7 +32,7 @@ function PostComponent({ match }) {
   return (
     <div key={data.postID}>
       <h2>
-        Post #{data.postID}: {data.title}POST
+        Post #{data.postID}: {data.title}
       </h2>
       <p>{data.content}</p>
     </div>
@@ -72,7 +72,6 @@ class PostPage extends React.Component {
   }
 
   render() {
-    console.log(this.state.postID);
     return (
       <div>
         <h1>Post Page</h1>
