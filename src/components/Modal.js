@@ -7,8 +7,8 @@ import { CSSTransition } from "react-transition-group";
 import { makeStyles } from "@material-ui/core/styles";
 
 function getModalStyle() {
-  const top = 50;
-  const left = 50;
+  const top = 30;
+  const left = 40;
 
   return {
     top: `${top}%`,
@@ -30,19 +30,19 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const modalTransition = {
-  alertEnter: {
+  enter: {
     opacity: 0,
     transform: "scale(0.9)"
   },
-  alertEnterActive: {
+  enterActive: {
     opacity: 1,
     transform: "translateX(0)",
     transition: "opacity 300ms, transform 300ms"
   },
-  alertExit: {
+  exit: {
     opacity: 1
   },
-  alertExitActive: {
+  exitActive: {
     opacity: 0,
     transform: "scale(0.9)",
     transition: "opacity 300ms, transform 300ms"

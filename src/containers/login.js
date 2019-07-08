@@ -38,8 +38,9 @@ class LoginPage extends React.Component {
   }
 
   onChange(event) {
-    let name = event.target.name;
-    console.log(name);
+    event.persist();
+    console.log(event);
+    // let name = event.target.name;
     // this.setState(state => {
     //   return { [name]: event.target.value };
     // });
